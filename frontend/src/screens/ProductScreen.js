@@ -1,19 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Row, Col ,Image, ListGroup, Card, Button} from 'react-bootstrap'
 import Rating from '../components/Rating'
-import products from '../products'
 
+import axios from 'axios'
 
 // React-router-dom no longer supports 'Match' Replaced it with useParams here to fetch the ID prop.
   
 const ProductScreen = () => {
 
+
+  const [product, setProduct] = useState({})
   const params = useParams()
+ useEffect((
 
-    const product = products.find(p => p._id === params.id )
-    
+ ) => {
+   const fetchProduct = async () => 
+   {
+     const { data } = await axios.get(`/api/products/${params.id}`)
 
+     setProduct(data)
+   }
+
+
+
+   fetchProduct()
+ }, [params] )
 
   return (
     <>
@@ -33,6 +45,8 @@ const ProductScreen = () => {
           </ListGroup>
 
           <ListGroup.Item>
+
+            
             <Rating
               value={product.rating}
               text={`${product.numReviews} reviews`}

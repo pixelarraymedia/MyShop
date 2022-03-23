@@ -1,9 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
-import products from '../products'; 
+import axios from 'axios'
+
 
 const HomeScreen = () => {
+  const [ products, setProducts ] = useState([])
+
+  useEffect(() => {
+    // useeffect to make request once component loads
+    //console.log('hello')
+    const fetchProducts = async () => {
+      const { data } = await axios.get('/api/products')
+//res.data destructured to data
+      setProducts(data)
+    }
+
+    fetchProducts()
+  }, [] ) //  Dependancy used when value changes. fires off use effect other custom side effects
+
+
   return (
     <>
 
