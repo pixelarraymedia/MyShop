@@ -1,5 +1,5 @@
 import React from 'react'
-
+// ******* To minimize code add this rating component directly to the product component.
  
 const Rating = ({value, text, color }) => {
   return (
