@@ -14,7 +14,7 @@ router.get('/',
 
 AsyncHandler(async (req, res) => {
 
-    const products = await Product.find({})
+    const products = await Product.findById(req.params.id)
 
     res.json(products)
 })
@@ -25,7 +25,7 @@ AsyncHandler(async (req, res) => {
 // @route GET /api/products
 // @access Fetch all products
 
-router.get('/:id', AsyncHandler (async (req, res) => {
+router.get('/:id', AsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id)
 
 
@@ -35,7 +35,8 @@ router.get('/:id', AsyncHandler (async (req, res) => {
     res.json(product)
     } else {
 
-        res.status(404).json({message: 'product not found'})
+        res.status(404)
+        throw new Error( 'Product Not Found' )
     }
  
 })
