@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router()
-import AsyncHandler from 'express-async-handler'
+import asyncHandler from 'express-async-handler'
 
 import Product from '../models/productModel.js'
 
@@ -12,10 +12,10 @@ import Product from '../models/productModel.js'
 
 router.get('/',
 
-AsyncHandler(async (req, res) => {
+asyncHandler(async (req, res) => {
 
-    const products = await Product.findById(req.params.id)
-
+    const products = await Product.find({})
+ 
     res.json(products)
 })
 )
@@ -25,7 +25,7 @@ AsyncHandler(async (req, res) => {
 // @route GET /api/products
 // @access Fetch all products
 
-router.get('/:id', AsyncHandler(async (req, res) => {
+router.get('/:id', asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id)
 
 
@@ -34,6 +34,9 @@ router.get('/:id', AsyncHandler(async (req, res) => {
    
     res.json(product)
     } else {
+        
+
+        // custom error handler
 
         res.status(404)
         throw new Error( 'Product Not Found' )

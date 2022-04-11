@@ -11,3 +11,7 @@ h3{
 .rating span {
   margin: 0.2rem;
 }
+
+select.form-control {
+  padding: 0;
+}
