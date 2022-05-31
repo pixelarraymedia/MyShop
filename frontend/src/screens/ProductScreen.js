@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom'
 import { Row, Col ,Image, ListGroup, Card, Button, Form} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listProductDetails } from '../actions/productActions'
-
+import { addToCart } from '../actions/cartActions'
 
 
 // React-router-dom no longer supports 'Match' Replaced it with useParams here to fetch the ID prop.
@@ -21,23 +21,25 @@ const ProductScreen = ( ) => {
 
   console.log(params.id)
 
-  const productDetails = useSelector(state => state.productDetails)
+  const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
   
 
 const addToCartHandler = () => {
-navigate(`/cart/${params.id}?qty=${qty}`)
-
+  dispatch(addToCart(params.id, qty));
+  navigate("/cart");
 }
+
+
    useEffect((
   
    ) => {
-     dispatch(listProductDetails(params.id))
+     dispatch(listProductDetails(params.id, qty))
     
   
   
      
-   }, [dispatch, params.id] )
+   }, [dispatch, params.id, qty] )
 
 
 
