@@ -28,14 +28,15 @@ const CartScreen = () => {
             // Remove from cart function
           const removeFromCartHandler = (id) => {
               dispatch(removeFromCart(id))
-            console.log('remove')
+  
           }
 
 
           // checkout button
           const checkoutHandler = () => {
             navigate('/login?redirect=shipping');
-
+                // using navigate for react routerv6
+                
             
           }
 
@@ -55,7 +56,6 @@ const CartScreen = () => {
                       <Row>
                         <Col md={2}>
                             <Image src={item.image} alt={item.name} fluid rounded />
-
                         </Col>
                         <Col md={3} >
                         <Link to={`/product/${item.product}`}>{item.name}</Link>
@@ -67,7 +67,7 @@ const CartScreen = () => {
                         <Form.Control as='select' value={item.qty} onChange={(e) => 
               dispatch(addToCart(item.product, Number(e.target.value)))} >
 
-{
+                { 
                 [...Array(item.countInStock).keys()].map((x) => (
                   <option key={x + 1} value={ x + 1} >
 
@@ -86,10 +86,7 @@ const CartScreen = () => {
                         
                         </Col>
                       </Row>
-
-
-
-                  
+   
             </ListGroup.Item>
           ))}
           </ListGroup>
