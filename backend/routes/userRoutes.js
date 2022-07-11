@@ -1,11 +1,13 @@
 import express from 'express'
 const router = express.Router()
 import {
-authUser,
-} from '../controllers/productController.js'
+authUser, getUserProfile
+} from '../controllers/userController.js'
 
 
-router.route('/login', authUser)
+router.post('/login', authUser)
+router.route('/profile').get(getUserProfile)
+
 
 
 export default router

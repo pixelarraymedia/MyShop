@@ -1,10 +1,11 @@
+import express from 'express'
 const router = express.Router()
 import asyncHandler from 'express-async-handler'
 import Product from '../models/productModel.js'
 
 // @desc Fetch all products
 // @route GET /api/products
-// @access Fetch all products
+// @access Fetch all productsS
 const getProducts = asyncHandler (async (req, res) => {
 
     const products = await Product.find({})
