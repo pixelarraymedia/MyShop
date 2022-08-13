@@ -23,9 +23,11 @@ const HomeScreen = () => {
 
   return (
     <>
-    <h1> hello 
-
+    
+    <h1> 
+      MERN stack E-commerce website
     </h1>
+
  {loading ? (
         <Loader />
       ) : error ? (
