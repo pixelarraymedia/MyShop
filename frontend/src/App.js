@@ -15,7 +15,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
-import UserProductListScreen from './screens/UserProductListScreen';
+import ProductListScreen from './screens/ProductListScreen';
 
 // React V6
 // <Route path='cart' element={CartScreen }> 
