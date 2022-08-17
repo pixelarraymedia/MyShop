@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails,updateUserProfile } from '../actions/userActions'
 import {USER_UPDATE_PROFILE_RESET} from '../constants/userConstants'
 import { listMyOrders } from '../actions/orderActions'
 
@@ -26,8 +26,8 @@ const ProfileScreen = () => {
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
-    const updateUserProfile = useSelector((state) => state.updateUserProfile)
-    const { success } = updateUserProfile
+    const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
+    const { success } = userUpdateProfile
 
     const orderListMy = useSelector((state) => state.orderListMy)
     const { loading: loadingOrders, error:errorOrders , orders } = orderListMy
@@ -36,7 +36,7 @@ const ProfileScreen = () => {
             if(!userInfo) {
                 navigate('/login')
              } else {
-                if(!user.name || !user.name || success ) {
+                if(!user || !user.name || success ) {
                     dispatch({type:USER_UPDATE_PROFILE_RESET})
                     dispatch(listMyOrders())
                     dispatch(getUserDetails('profile'))
@@ -59,100 +59,120 @@ const ProfileScreen = () => {
 
 
 
-    return <Row>
+    return (
+      <Row>
         <Col md={3}>
-        <h2> User profile</h2>
-        {message && <Message variant='danger'>{message}</Message>} 
-        {error && <Message variant='danger'>{error}</Message>} 
-        {success && <Message variant='success'> Profile Updated </Message>} 
-        {loading && <Loader />}
-        
-        <Form onSubmit={submitHandler}>
-            
-        <Form.Group controlId='name'>
-                    <Form.Label>Name </Form.Label>
-                        <Form.Control type='name' placeholder='enter name' value={name} onChange={(e) => setName(e.target.value)}
-                        >
-                        </Form.Control>
-                    </Form.Group>
+          <h2> User profile</h2>
+          {message && <Message variant="danger">{message}</Message>}
+          {error && <Message variant="danger">{error}</Message>}
+          {success && <Message variant="success"> Profile Updated </Message>}
+          {loading && <Loader />}
 
-                <Form.Group controlId='email'>
-                    <Form.Label>Email Address </Form.Label>
-                            <Form.Control type='email' placeholder='enter email' value={email} onChange={(e) => setEmail(e.target.value)}>
-                            </Form.Control>
-                    </Form.Group>
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId="name">
+              <Form.Label>Name </Form.Label>
+              <Form.Control
+                type="name"
+                placeholder="enter name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-                    <Form.Group controlId='password'>
-                    <Form.Label>Password </Form.Label>
-                            <Form.Control type='password' placeholder='enter password' value={password} onChange={(e) => setPassword(e.target.value)}
-                            >
-                            </Form.Control>
-                    </Form.Group>
+            <Form.Group controlId="email">
+              <Form.Label>Email Address </Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-                    <Form.Group controlId='confirmpassword'>
-                    <Form.Label>Confirm Password </Form.Label>
-                            <Form.Control type='password' placeholder='Confirm password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
-                            >
-                            </Form.Control>
-                    </Form.Group>
+            <Form.Group controlId="password">
+              <Form.Label>Password </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-                    <Button type='submit' variant='primary'>
-                       Uodate
-                    </Button>
+            <Form.Group controlId="confirmpassword">
+              <Form.Label>Confirm Password </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirm password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-        </Form>
+            <Button type="submit" variant="primary">
+              Uodate
+            </Button>
+          </Form>
         </Col>
         <Col md={9}>
-            <h2> My Orders </h2>
-            {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'> {errorOrders} </Message> : ( <Table striped bordered hover responsive className='table-sm'>
-        <thead>
-            <tr>
-                <th> ID </th>
-                <th> DATE </th>
-                <th> TOTAL </th>
-                <th> PAID </th>
-                <th> DELIVERED </th>
-        
+          <h2> My Orders </h2>
+          {loadingOrders ? (
+            <Loader />
+          ) : errorOrders ? (
+            <Message variant="danger"> {errorOrders} </Message>
+          ) : (
+            <Table striped bordered hover responsive className="table-sm">
+              <thead>
+                <tr>
+                  <th> ID </th>
+                  <th> DATE </th>
+                  <th> TOTAL </th>
+                  <th> PAID </th>
+                  <th> DELIVERED </th>
+                </tr>
+              </thead>
 
-            </tr>
-        </thead>
-
-        <tbody>
-            {orders.map(order => (
-                <tr key={order._id}>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order._id}>
                     <td>{order._id}</td>
                     <td>{order.createdAt.substring(0, 10)}</td>
                     <td>{order.totalPrice}</td>
-                    <td>{order.isPaid ? (order.paidAt.substring(0, 10) ) : ( 
-                    <i className='fas fa-times' style={{color: 'red'}}> 
-                        </i>
-                    )}
-                    
-                    </td>
-                    <td>{order.isDelivered ? 
-                    ( order.deliveredAt.substring(0, 10) ) : ( 
-                    <i className='fas fa-times' style={{color:'red'}}> 
-                        </i>
-                    )}
-                    
+                    <td>
+                      {order.isPaid ? (
+                        order.paidAt.substring(0, 10)
+                      ) : (
+                        <i
+                          className="fas fa-times"
+                          style={{ color: "red" }}
+                        ></i>
+                      )}
                     </td>
                     <td>
-                        <LinkContainer to={`/order/${order._id}`}>
-                            <Button className='btn-sm' variant='light'></Button>
-                        </LinkContainer>
+                      {order.isDelivered ? (
+                        order.deliveredAt.substring(0, 10)
+                      ) : (
+                        <i
+                          className="fas fa-times"
+                          style={{ color: "red" }}
+                        ></i>
+                      )}
+                    </td>
+                    <td>
+                      <LinkContainer to={`/order/${order._id}`}>
+                        <Button className="btn-sm" variant="light"></Button>
+                      </LinkContainer>
                     </td>
 
                     <td>{order._id}</td>
-
-                </tr>
-            ))}
-        </tbody>
-                
-                
-                 </Table>
-                  )}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
         </Col>
-    </Row>
+      </Row>
+    );
 }
 
 
