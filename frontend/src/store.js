@@ -1,8 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { productListReducer, productDetailsReducer,
-productDeleteReducer } from './reducers/productReducers'
+import { productListReducer,
+     productDetailsReducer,
+productDeleteReducer,
+productCreateReducer, 
+productUpdateReducer,
+productReviewCreateReducer} from './reducers/productReducers'
 
 import { cartReducer } from './reducers/cartReducers'
 import { userLoginReducer,
@@ -15,7 +19,7 @@ import { userLoginReducer,
      } from './reducers/userReducers'
 
 
-     import { orderCreateReducer, orderDetailsReducer, orderPayReducer, orderListMyReducer } from './reducers/orderReducers'
+     import { orderCreateReducer, orderDeliverReducer, orderDetailsReducer, orderPayReducer, orderListMyReducer, orderListReducer } from './reducers/orderReducers'
 
 
 
@@ -23,18 +27,25 @@ const reducer = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
     productDelete: productDeleteReducer,
+    productCreate: productCreateReducer,
+    productUpdate: productUpdateReducer,
+    productReviewCreate: productReviewCreateReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
-    userUpdateProfile: userUpdateProfileReducer,
-    orderCreate: orderCreateReducer,
-    orderDetails: orderDetailsReducer,
-    orderPay: orderPayReducer,
+    userUpdateProfile: userUpdateProfileReducer, 
     userList: userListReducer,
     userDelete: userDeleteReducer,
     userUpdate: userUpdateReducer,
-    orderListMy: orderListMyReducer
+    orderCreate: orderCreateReducer,
+    orderDetails: orderDetailsReducer,
+    orderPay: orderPayReducer,
+    orderList:orderListReducer,
+    orderDeliver:orderDeliverReducer,   
+    orderListMy: orderListMyReducer,
+  
+ 
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') 
