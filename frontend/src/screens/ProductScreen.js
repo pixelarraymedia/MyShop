@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Rating from '../components/Rating'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import Meta from '../components/Meta'
 import { 
   listProductDetails, 
   createProductReview } from '../actions/productActions'
@@ -79,7 +80,7 @@ const submitHandler = (e) => {
         <Message variant="danger">{error} </Message>
       ) : (
         <>
-
+      <Meta title={product.name} />
         <Row>
           <Col md={6}>
             <Image src={product.image} alt={product.name} fluid />
