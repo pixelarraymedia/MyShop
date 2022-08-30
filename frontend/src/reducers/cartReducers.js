@@ -1,4 +1,8 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM, CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from "../constants/cartConstant";
+import { CART_ADD_ITEM,
+     CART_REMOVE_ITEM, 
+     CART_SAVE_PAYMENT_METHOD,
+      CART_SAVE_SHIPPING_ADDRESS,
+    CART_CLEAR_ITEMS } from "../constants/cartConstant";
 
 
 export const cartReducer = (state = {cartItems: [], shippingAddress: {} }, action ) => {
@@ -6,7 +10,8 @@ export const cartReducer = (state = {cartItems: [], shippingAddress: {} }, actio
         case CART_ADD_ITEM:
             const item = action.payload
             const existItem = state.cartItems.find((x) => x.product === item.product)
-            
+
+           // This line loop over cartItems, if the item is equal to existProduct, return the updated item (item) otherwise keep is as it is (x)
 
 
                         if(existItem) {
@@ -40,8 +45,13 @@ export const cartReducer = (state = {cartItems: [], shippingAddress: {} }, actio
                                         ...state,
                                         paymentMethod: action.payload,
                                     }
-        default:
-            return state
+                                    case CART_CLEAR_ITEMS:
+                                        return {
+                                          ...state,
+                                          cartItems: [],
+                                        }
+                                      default:
+                                        return state
 
     }
 

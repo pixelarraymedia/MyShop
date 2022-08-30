@@ -12,6 +12,7 @@ const SearchBox = () => {
           Navigate(`/search/${keyword}`)
         } else {
             Navigate('/');
+            // Add no found results page
         }
     };
 

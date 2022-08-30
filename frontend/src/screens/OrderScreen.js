@@ -27,8 +27,8 @@ const OrderScreen = () => {
       const orderDeliver = useSelector((state) => state.orderDeliver)
       const { loading: loadingDeliver , success: successDeliver } = orderDeliver
 
-      const orderLogin = useSelector((state) => state.orderLogin)
-      const { userInfo  } = orderLogin
+      const userLogin = useSelector((state) => state.userLogin)
+      const { userInfo  } = userLogin
 
       if (!loading) {
         //   Calculate prices
@@ -43,7 +43,7 @@ const OrderScreen = () => {
       
       useEffect(() => {
 
-        if(userInfo) {
+        if(!userInfo) {
           Navigate('/login')
         }
 

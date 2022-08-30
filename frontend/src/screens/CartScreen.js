@@ -17,7 +17,7 @@ const CartScreen = () => {
 
   const { cartItems } = cart 
 
-    console.log(cartItems)
+   //console.log(cartItems)
    
     useEffect(() => {
       if (params.id) {

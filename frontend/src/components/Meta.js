@@ -11,9 +11,9 @@ const Meta = ({title, description, keywords}) => {
   )
 }
 Meta.defaultProps = {
-    title : 'Welcome to Proshop',
-    description : 'we sell the best products for cheap',
-    keywords : 'electronics, buy electronics, cheap electronics'
+    title : 'Welcome to MyShop',
+    description : 'Powered by MERN stack',
+    keywords : 'electronics, buy electronics, cheap electronics, MongoDB, Redux, Javascript'
 
 }
 

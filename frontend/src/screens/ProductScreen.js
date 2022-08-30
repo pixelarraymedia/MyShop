@@ -26,7 +26,7 @@ const ProductScreen = ( ) => {
   const params = useParams();
 
 
-  console.log(params.id)
+ // console.log(params.id)
 
   const productDetails = useSelector((state) => state.productDetails)
   const { loading, error, product } = productDetails
@@ -55,7 +55,7 @@ const ProductScreen = ( ) => {
 
 
 const addToCartHandler = () => {
-  navigate(`/cart/${params.id}?qty=${qty}`);
+ navigate(`/cart/${params.id}?qty=${qty}`);
 }
 
 const submitHandler = (e) => {
