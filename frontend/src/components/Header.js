@@ -20,9 +20,9 @@ const Header = () => {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>ProShop</Navbar.Brand>
+            <Navbar.Brand>MyShop</Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="navbar-toggle x collapsed"  className="navbar-toggle x collapsed" data-toggle="collapse" data-target="#navbar-collapse-x" />
           <Navbar.Collapse id="basic-navbar-nav">
             
           <SearchBox />
