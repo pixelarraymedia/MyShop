@@ -27,7 +27,6 @@ const ShippingScreen = () => {
         country }))
        Navigate('/payment')
     }
-
   return( 
         <FormContainer>
             <CheckoutSteps step1 step2 step3/>
